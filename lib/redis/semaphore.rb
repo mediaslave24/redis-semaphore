@@ -90,11 +90,7 @@ class Redis
       if token
         @redis.hexists(grabbed_key, token)
       else
-        @tokens.each do |token|
-          return true if locked?(token)
-        end
-
-        false
+        @tokens.any? { |t| locked?(t) }
       end
     end
 
